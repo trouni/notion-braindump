@@ -28,11 +28,13 @@ export default {
 
   watch: {
     tasks: {
-      handler() {
+      handler(tasks, oldTasks) {
         localStorage.setItem('tasks', JSON.stringify(this.tasks))
-        this.$nextTick(() => {
-          this.$refs.list.$el.scrollTop = this.$refs.list.$el.scrollHeight
-        })
+        if (tasks.length !== oldTasks.length) {
+          this.$nextTick(() => {
+            this.$refs.list.$el.scrollTop = this.$refs.list.$el.scrollHeight
+          })
+        }
       },
       deep: true,
     },
