@@ -1,6 +1,26 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
 
+*,
+*::before,
+*::after {
+  // Deactivate text selection on mobile
+  user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  -ms-user-drag: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+input,
+textarea {
+  // Allow text selection on inputs
+  user-select: text;
+}
+
 html {
   background: rgba(#35495e,0.03);
   -webkit-font-smoothing: antialiased;

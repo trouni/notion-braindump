@@ -103,6 +103,7 @@ export default {
 @import './assets/style.scss';
 
 main {
+  position: fixed;
   font-family: Poppins, Helvetica, Arial, sans-serif;
   font-weight: 100;
   text-align: center;
