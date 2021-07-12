@@ -6,23 +6,23 @@ module.exports = {
     },
     appleMobileWebAppCapable: 'yes',
     iconPaths: {
-      favicon32: 'img/favicon-32x32.png',
-      favicon16: 'img/favicon-16x16.png',
-      appleTouchIcon: 'img/apple-touch-icon-180x180.png',
-      maskIcon: 'img/safari-pinned-tab.svg',
-      msTileImage: 'img/mstile-150x150.png',
+      favicon32: 'img/icons/favicon-32x32.png',
+      favicon16: 'img/icons/favicon-16x16.png',
+      appleTouchIcon: 'img/icons/apple-touch-icon-180x180.png',
+      maskIcon: 'img/icons/safari-pinned-tab.svg',
+      msTileImage: 'img/icons/mstile-150x150.png',
     },
     manifestOptions: {
-      name: 'Section L Check-in',
-      short_name: 'Check-in',
+      name: 'Braindump',
+      short_name: 'Braindump',
       icons: [
         {
-          src: '/img/android-chrome-192x192.png',
+          src: '/img/icons/android-chrome-192x192.png',
           sizes: '192x192',
           type: 'image/png',
         },
         {
-          src: '/img/android-chrome-512x512.png',
+          src: '/img/icons/android-chrome-512x512.png',
           sizes: '512x512',
           type: 'image/png',
         },
@@ -35,7 +35,7 @@ module.exports = {
       scope_url: '/',
       intent_filters: {
         scope_url_scheme: 'https',
-        scope_url_host: 'checkin.section-l.co',
+        scope_url_host: 'massive-braindump.netlify.app',
         scope_url_path: '/',
       },
     },
