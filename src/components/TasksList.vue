@@ -14,6 +14,8 @@
 
 <script>
 import TaskCard from './TaskCard'
+import { RepositoryFactory } from '@/api/repository-factory'
+const PagesRepository = RepositoryFactory.get('pages')
 
 export default {
   name: 'TasksList',
@@ -27,10 +29,18 @@ export default {
   },
 
   methods: {
-    toggleTask(taskIndex) {
-      const taskToUpdate = this.tasks[taskIndex]
-      taskToUpdate.done = !taskToUpdate.done
-      this.$set(this.tasks, taskIndex, taskToUpdate)
+    async toggleTask(taskIndex) {
+      const task = this.tasks[taskIndex]
+      task.done = !task.done
+      try {
+        await PagesRepository.patchPage(task.id, {
+          properties: {
+            'Done?': { checkbox: task.done },
+          },
+        })
+      } catch (error) {
+        task.done = !task.done
+      }
     },
   },
 }

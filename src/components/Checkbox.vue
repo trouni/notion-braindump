@@ -7,7 +7,7 @@ export default {
   props: {
     checked: Boolean,
   },
-};
+}
 </script>
 
 <style lang="scss">
@@ -16,7 +16,7 @@ $check-color: #41b883;
   display: flex;
   align-self: center;
   border: solid 2px $check-color;
-  width: 2rem;
+  min-width: 2rem;
   height: 2rem;
   border-radius: 50%;
   margin: 0 1rem;
@@ -29,7 +29,7 @@ $check-color: #41b883;
     background-color: $check-color;
   }
   &.checked:after {
-    content: "";
+    content: '';
     display: inline-block;
     transform: rotate(45deg) translate(-35%, 40%);
     height: 1rem;

@@ -2,17 +2,16 @@
   <div :class="['task-card', { done }]">
     <div>
       <h3>{{ title }}</h3>
-      <!-- <p>{{ description }}</p> -->
     </div>
-    <!-- <Checkbox @click="$emit('toggle-task', taskIndex)" :checked="done" /> -->
+    <Checkbox @click="$emit('toggle-task', taskIndex)" :checked="done" />
   </div>
 </template>
 
 <script>
-// import Checkbox from "./Checkbox";
+import Checkbox from './Checkbox'
 export default {
   components: {
-    // Checkbox,
+    Checkbox,
   },
   props: {
     title: String,
@@ -32,7 +31,6 @@ export default {
   text-align: left;
   background-color: saturate(rgba(#41b883, 0.03), 30%);
   transition: all 0.3s;
-  min-height: 4rem;
   border-bottom: solid 1px rgba(#35495e, 0.1);
   border-left: solid 0.7rem #41b883;
   p {

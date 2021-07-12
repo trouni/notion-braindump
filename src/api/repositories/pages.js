@@ -15,4 +15,13 @@ export default {
       },
     })
   },
+  patchPage(pageId, { properties } = {}) {
+    return Repository.post(`/`, {
+      method: 'PATCH',
+      path: `/pages/${pageId}`,
+      payload: {
+        properties,
+      },
+    })
+  },
 }

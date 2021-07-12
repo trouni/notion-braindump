@@ -1,6 +1,5 @@
 <template>
   <main :class="{ loading: loading }">
-    <!-- <div @click="refreshTasks()" class="btn round-icon"></div> -->
     <TasksList :tasks="tasks" ref="list" />
     <NewTask @add-task="addTask" />
   </main>
@@ -68,12 +67,6 @@ export default {
     async refreshTasks() {
       this.loading = true
       const filter = {
-        // {
-        //   property: 'Task',
-        //   text: {
-        //     contains: 'laundry',
-        //   },
-        // },
         property: 'Inbox?',
         formula: {
           checkbox: {
@@ -91,9 +84,9 @@ export default {
         filter,
         sorts,
       })
-      console.log(response)
       this.tasks = response.data.results.map(el => {
         return {
+          id: el.id,
           title: el.properties.Task.title[0].plain_text,
           done: false,
         }
