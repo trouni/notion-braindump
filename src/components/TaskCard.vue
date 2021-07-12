@@ -1,9 +1,7 @@
 <template>
   <div :class="['task-card', { done }]">
-    <div>
-      <h3>{{ title }}</h3>
-    </div>
     <Checkbox @click="$emit('toggle-task', taskIndex)" :checked="done" />
+    <h3>{{ title }}</h3>
   </div>
 </template>
 
@@ -33,21 +31,22 @@ export default {
   transition: all 0.3s;
   border-bottom: solid 1px rgba(#35495e, 0.1);
   border-left: solid 0.7rem #41b883;
+  display: flex;
+  align-items: center;
   p {
     font-size: 0.9rem;
   }
   &:hover {
     background-color: white;
-    // transform: scale(1.02);
     box-shadow: 2px 3px 10px rgba(black, 0.1);
   }
-  & > div:first-child {
+  & > .checkbox {
+    min-width: 2rem;
+  }
+  & > h3 {
     margin: 0 1rem;
     padding: 1rem 0;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
   &.done {
     border-left: solid 8px rgba(#35495e, 0.3);
