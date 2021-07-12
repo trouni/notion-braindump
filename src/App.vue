@@ -53,5 +53,6 @@ main {
   bottom: 2rem;
   right: 1.2rem;
   transform: scale(1.2);
+  opacity: 0.5;
 }
 </style>

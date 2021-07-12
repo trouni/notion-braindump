@@ -65,11 +65,11 @@ input, textarea {
   border-radius: 1.4em;
   cursor: pointer;
   padding: 0 2rem;
-  &:hover {
-    transform: scale(1.06);
-  }
+  transition: opacity 0.1s;
   &:active {
-    transform: scale(1.03);
+    transition: opacity 0s;
+    opacity: 1;
+    transform: scale(1.1);
   }
   &:focus {
     outline: none;
