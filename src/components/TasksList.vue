@@ -38,7 +38,8 @@ export default {
         localStorage.setItem('tasks', JSON.stringify(this.tasks))
         if (tasks.length !== oldTasks.length) {
           this.$nextTick(() => {
-            this.$refs.list.$el.scrollTop = this.$refs.list.$el.scrollHeight
+            this.$refs.list.$el.scrollTop = 0
+            // this.$refs.list.$el.scrollTop = this.$refs.list.$el.scrollHeight
           })
         }
       },
