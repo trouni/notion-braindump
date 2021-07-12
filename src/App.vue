@@ -50,7 +50,8 @@ main {
 .plus-task {
   position: fixed;
   margin: 0;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 2rem;
+  right: 1.2rem;
+  transform: scale(1.2);
 }
 </style>
