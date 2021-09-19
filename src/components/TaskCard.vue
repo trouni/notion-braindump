@@ -27,10 +27,10 @@ export default {
 .task-card {
   display: flex;
   text-align: left;
-  background-color: saturate(rgba(#41b883, 0.03), 30%);
+  background-color: saturate(rgba(#027edd, 0.03), 30%);
   transition: all 0.3s;
   border-bottom: solid 1px rgba(#35495e, 0.1);
-  border-left: solid 0.7rem #41b883;
+  border-left: solid 0.7rem #027edd;
   display: flex;
   align-items: center;
   p {

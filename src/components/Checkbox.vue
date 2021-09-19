@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss">
-$check-color: #41b883;
+$check-color: #027edd;
 .checkbox {
   display: flex;
   align-self: center;
@@ -30,7 +30,7 @@ $check-color: #41b883;
   &.checked:after {
     content: '';
     display: inline-block;
-    transform: rotate(45deg) translate(-35%, 40%);
+    transform: rotate(45deg) translate(-20%, 55%);
     height: 1rem;
     width: 1rem;
     margin-left: 60%;

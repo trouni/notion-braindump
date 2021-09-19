@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks-list" :class="{ loading: loading }">
+  <div class="tasks-ctn" :class="{ loading: loading }" ref="list">
     <TaskCard
       v-for="(task, index) in tasks"
       :key="index"
@@ -9,6 +9,10 @@
       :task-index="index"
       @toggle-task="toggleTask"
     />
+    <div v-if="!tasks.length" class="empty-inbox">
+      <h2>🎉</h2>
+      <p>The inbox is empty</p>
+    </div>
   </div>
 </template>
 
@@ -35,13 +39,8 @@ export default {
   watch: {
     tasks: {
       handler(tasks, oldTasks) {
-        localStorage.setItem('tasks', JSON.stringify(this.tasks))
-        if (tasks.length !== oldTasks.length) {
-          this.$nextTick(() => {
-            this.$refs.list.$el.scrollTop = 0
-            // this.$refs.list.$el.scrollTop = this.$refs.list.$el.scrollHeight
-          })
-        }
+        // localStorage.setItem('tasks', JSON.stringify(this.tasks))
+        if (tasks.length !== oldTasks.length) this.scrollList()
       },
       deep: true,
     },
@@ -52,9 +51,18 @@ export default {
   },
 
   methods: {
+    scrollList() {
+      this.$nextTick(
+        () => (this.$refs.list.scrollTop = this.$refs.list.scrollHeight)
+      )
+    },
     async addTask(title) {
+      if (!title.trim()) return
+
       const task = { title }
-      this.tasks.unshift(task)
+      // this.tasks.unshift(task)
+      this.tasks.push(task)
+      this.scrollList()
       try {
         await PagesRepository.postPage({
           properties: {
@@ -70,13 +78,14 @@ export default {
           },
         })
       } catch (error) {
-        this.tasks.shift()
+        // this.tasks.shift()
+        this.tasks.pop()
       }
     },
     async refreshTasks() {
       this.loading = true
       const filter = {
-        property: 'Inbox?',
+        property: '_Inbox?',
         formula: {
           checkbox: {
             equals: true,
@@ -86,13 +95,14 @@ export default {
       const sorts = [
         {
           timestamp: 'created_time',
-          direction: 'descending',
+          direction: 'ascending',
         },
       ]
       const response = await DatabasesRepository.queryDatabase({
         filter,
         sorts,
       })
+      this.loading = false
       this.tasks = response.data.results.map(el => {
         return {
           id: el.id,
@@ -100,7 +110,6 @@ export default {
           done: false,
         }
       })
-      this.loading = false
     },
     async toggleTask(taskIndex) {
       console.log(taskIndex)
@@ -121,8 +130,20 @@ export default {
 </script>
 
 <style lang="scss">
-.tasks-list {
+.tasks-ctn {
   flex-grow: 1;
   overflow: scroll;
+}
+
+.empty-inbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  h2 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
 }
 </style>
