@@ -4,7 +4,7 @@
       <img src="./assets/logo.png" alt="Logo" class="logo" />
       <h2>Brain dump</h2>
     </header>
-    <TasksList ref="list" />
+    <TasksList ref="list" @init="$refs.new.focus()" />
     <div class="task-card new-task">
       <div class="plus-task btn round-icon" @click="addTask">+</div>
       <input

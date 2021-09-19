@@ -56,8 +56,9 @@ export default {
     },
   },
 
-  mounted() {
-    this.refreshTasks()
+  async mounted() {
+    await this.refreshTasks()
+    this.$emit('init')
   },
 
   methods: {
