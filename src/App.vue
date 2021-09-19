@@ -35,7 +35,7 @@ export default {
   },
 
   mounted() {
-    this.$refs.new.focus()
+    this.$nextTick(() => this.$refs.new.focus())
   },
 
   methods: {
@@ -118,5 +118,14 @@ main {
   //   font-size: 0.9rem;
   //   resize: none;
   // }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

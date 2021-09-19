@@ -9,15 +9,23 @@
       :task-index="index"
       @toggle-task="toggleTask"
     />
-    <div v-if="!tasks.length" class="empty-inbox">
-      <h2>🎉</h2>
-      <p>The inbox is empty</p>
-    </div>
+    <transition name="fade">
+      <div v-if="!tasks.length && !loading" class="fixed-center empty-inbox">
+        <h2>🎉</h2>
+        <p>The inbox is empty</p>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div v-if="loading" class="fixed-center">
+        <spinner />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 import TaskCard from './TaskCard'
+import Spinner from './Spinner'
 import { RepositoryFactory } from '@/api/repository-factory'
 const DatabasesRepository = RepositoryFactory.get('databases')
 const PagesRepository = RepositoryFactory.get('pages')
@@ -27,11 +35,13 @@ export default {
 
   components: {
     TaskCard,
+    Spinner,
   },
 
   data() {
     return {
-      tasks: JSON.parse(localStorage.getItem('tasks')) || [],
+      // tasks: JSON.parse(localStorage.getItem('tasks')) || [],
+      tasks: [],
       loading: true,
     }
   },
@@ -59,6 +69,7 @@ export default {
     async addTask(title) {
       if (!title.trim()) return
 
+      this.loading = true
       const task = { title }
       // this.tasks.unshift(task)
       this.tasks.push(task)
@@ -80,6 +91,8 @@ export default {
       } catch (error) {
         // this.tasks.shift()
         this.tasks.pop()
+      } finally {
+        this.loading = false
       }
     },
     async refreshTasks() {
@@ -130,6 +143,13 @@ export default {
 </script>
 
 <style lang="scss">
+.fixed-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .tasks-ctn {
   flex-grow: 1;
   overflow: scroll;
