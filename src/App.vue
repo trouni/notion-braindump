@@ -1,27 +1,25 @@
 <template>
-  <main>
-    <header>
-      <img src="./assets/logo.png" alt="Logo" class="logo" />
-      <h2>Brain dump</h2>
-    </header>
-    <TasksList ref="list" @init="$refs.new.focus()" />
-    <form class="new-task" action="#" @submit.prevent="addTask">
-      <input
-        v-model="title"
-        type="text"
-        placeholder="What's on your mind?"
-        ref="new"
-        @keypress.enter="addTask"
-      />
-      <div
-        class="plus-task btn round-icon"
-        @click="clickPlusBtn"
-        @keydown.enter="clickPlusBtn"
-      >
-        +
-      </div>
-    </form>
-  </main>
+  <header>
+    <img src="./assets/logo.png" alt="Logo" class="logo" />
+    <h2>Brain dump</h2>
+  </header>
+  <TasksList ref="list" @init="$refs.new.focus()" />
+  <form class="new-task" action="#" @submit.prevent="addTask">
+    <input
+      v-model="title"
+      type="text"
+      placeholder="What's on your mind?"
+      ref="new"
+      @keypress.enter="addTask"
+    />
+    <div
+      class="plus-task btn round-icon"
+      @click="clickPlusBtn"
+      @keydown.enter="clickPlusBtn"
+    >
+      +
+    </div>
+  </form>
 </template>
 
 <script>
@@ -41,6 +39,15 @@ export default {
   },
 
   mounted() {
+    // for mobile vh
+    const setViewHeight = async () => {
+      await this.$nextTick()
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+    setViewHeight()
+    window.addEventListener('resize', setViewHeight)
+
     this.$nextTick(() => this.$refs.new.focus())
   },
 
@@ -79,16 +86,19 @@ header {
   }
 }
 
-main {
+#app {
+  display: flex;
+  flex-direction: column;
+  height: calc(var(--vh) * 100);
+}
+
+body {
   position: fixed;
   font-family: Poppins, Helvetica, Arial, sans-serif;
   font-weight: 100;
   text-align: center;
   color: #2c3e50;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   overflow: hidden;
   width: 100%;
   background-color: #eee;
