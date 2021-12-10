@@ -33,6 +33,7 @@ export default {
   border-left: solid 0.7rem #027edd;
   display: flex;
   align-items: center;
+  word-break: break-word;
   p {
     font-size: 0.9rem;
   }
